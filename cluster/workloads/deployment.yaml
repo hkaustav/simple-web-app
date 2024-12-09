@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: simple-app
-          image: simple-web-app:latest
+          image: dockercaustav/simple-web-app:latest
           resources:
             limits:
               memory: "512Mi"
@@ -25,4 +25,4 @@ spec:
               memory: "256Mi"
               cpu: "250m"
           ports:
-            - containerPort: 80
+            - containerPort: 8080
