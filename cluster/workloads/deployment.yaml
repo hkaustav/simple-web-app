@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: simple-app
-          image: dockercaustav/simple-python-web-app:1
+          image: dockercaustav/simple-python-web-app:2
           resources:
             limits:
               memory: "512Mi"
