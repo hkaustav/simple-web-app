@@ -1,9 +1,16 @@
 replicaCount: 1
 
-image:
-  repository: dockercaustav/simple-python-web-app
-  tag: "2"
-  pullPolicy: IfNotPresent
+service1:
+  image:
+    repository: dockercaustav/simple-python-web-app
+    tag: "2"
+    pullPolicy: IfNotPresent
+    
+service2:
+  image:
+    repository: dockercaustav/simple-python-web-app
+    tag: "2"
+    pullPolicy: IfNotPresent
 
 service:
   type: ClusterIP
