@@ -25,11 +25,11 @@ appVersion: "1.16.0"
 dependencies:
   - name: common
     version: 0.1.0
-    repository: file://.
+    repository: file://./
     alias: service1
     condition: service1.enabled
   - name: common
     version: 0.1.0
-    repository: file://.
+    repository: file://./
     alias: service2
     condition: service2.enabled
