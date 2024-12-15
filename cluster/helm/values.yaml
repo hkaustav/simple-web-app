@@ -1,14 +1,22 @@
 replicaCount: 1
 
+global:
+  image:
+    repository: dockercaustav/simple-python-web-app
+    tag: "2"
+    pullPolicy: IfNotPresent
+
 service1:
+  nameOverride: service1
   image:
     repository: dockercaustav/simple-python-web-app
     tag: "2"
     pullPolicy: IfNotPresent
     
 service2:
+  nameOverride: service2
   image:
-    repository: dockercaustav/simple-python-web-app
+    repository: dockercaustav/simple-python-web-app-2
     tag: "2"
     pullPolicy: IfNotPresent
 
