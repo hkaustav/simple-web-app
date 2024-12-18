@@ -52,5 +52,6 @@ jobs:
         with:
           context: .
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/simple-python-web-app:${{ steps.increment_version.outputs.new_version }}
