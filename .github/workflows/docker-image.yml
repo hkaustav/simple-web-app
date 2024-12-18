@@ -16,10 +16,13 @@ jobs:
         uses: actions/checkout@v3
 
       # Get the latest tag
-      - name: Get latest tag
-        id: get_tag
+      - name: Get latest tag from Docker Hub
+        id: get_latest_tag
         run: |
-          latest_tag=$(git describe --tags --abbrev=0 || echo "v0.0.0")
+          latest_tag=$(curl -s https://hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/simple-python-web-app/tags/?page_size=1 | jq -r '.results[0].name')
+          if [ -z "$latest_tag" ]; then
+            latest_tag="0.0.0"
+          fi
           echo "latest_tag=$latest_tag" >> $GITHUB_ENV
 
       # Increment the version
@@ -29,9 +32,10 @@ jobs:
           IFS='.' read -r major minor patch <<< "${latest_tag#v}"
           patch=$((patch + 1))
           new_version="v$major.$minor.$patch"
-          echo "new_version=$new_version" >> $GITHUB_ENV
+          echo "::set-output name=new_version::$new_version"
 
   build:
+    needs: versioning
     runs-on: ubuntu-latest
 
     steps:
@@ -52,4 +56,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/simple-python-web-app:${{ $GITHUB_ENV }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/simple-python-web-app:${{ needs.job1.outputs.new_version }}
